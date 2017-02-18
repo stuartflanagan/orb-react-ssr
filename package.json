@@ -1,0 +1,41 @@
+{
+  "name": "orb-react-ssr",
+  "version": "1.0.0",
+  "description": "",
+  "config": {
+    "assetBucket": "[your.bucket.name.here]",
+    "region": "ap-southeast-2"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "transpile": "babel --presets es2015 src/server --out-dir bin",
+    "create:lambda": "npm run transpile && claudia create --name $npm_package_name --region $npm_package_config_region --deploy-proxy-api --handler bin/main.handler",
+    "create:s3": "aws s3 mb s3://$npm_package_config_assetBucket",
+    "create": "npm run create:s3 && npm run create:lambda",
+    "deploy:lambda": "npm run transpile && claudia update",
+    "deploy:s3": "npm run build && aws s3 cp ./dist/ s3://$npm_package_config_assetBucket/assets/ --recursive --region ap-southeast-2 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers",
+    "deploy": "npm run deploy:s3 && npm run deploy:lambda"
+  },
+  "author": "Stuart Flanagan",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-2": "^6.13.0",
+    "claudia": "^2.7.0",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "history": "^4.5.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^4.0.0-beta.6",
+    "react-router-dom": "^4.0.0-beta.6"
+  },
+  "files":[
+    "bin/"
+  ]
+}

@@ -19,6 +19,16 @@ This demo uses [ClaudiaJS](https://claudiajs.com/) to setup a Lambda function an
 `$ npm install`
 
 
+## Configure the Project for AWS
+There are 3 main areas to configure before you can create and deploy your project. These configuration variables are all set within the `package.json` file under `config`
+### Name
+This is the name of the Lambda function that will be created on AWS. It will also be used to identify the API Gateway proxy that is created.
+
+### Region
+This specifies the region you want to create the project in.
+
+### Asset bucket (config.assetBucket)
+This is the name of the S3 bucket that is created to serve static assets. S3 bucket names are required to be unique across the whole of S3.
 
 ## Create the project and deploy to AWS Lambda, APIG and S3
 As long as you have an AWS user set up with the correct permissions you should just need to run this command.

@@ -21,10 +21,11 @@ This demo uses [ClaudiaJS](https://claudiajs.com/) to setup a Lambda function an
 
 ## Configure the Project for AWS
 There are 3 main areas to configure before you can create and deploy your project. These configuration variables are all set within the `package.json` file under `config`
-### Name
+
+### Name (config.name)
 This is the name of the Lambda function that will be created on AWS. It will also be used to identify the API Gateway proxy that is created.
 
-### Region
+### Region (config.region)
 This specifies the region you want to create the project in.
 
 ### Asset bucket (config.assetBucket)

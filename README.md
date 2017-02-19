@@ -2,33 +2,57 @@
 
 Demo showing a very small reactjs with routes. The demo serves the initial route via API Gateway and Lambda and loads a webpack bundle from S3.
 
-## installation & Configuration
+## Installation & Configuration
 
 This demo uses [ClaudiaJS](https://claudiajs.com/) to setup a Lambda function and put an API Gateway proxy infront of the Lambda function. Please refer to the [ClaudiaJS installation & configuration guide] (https://claudiajs.com/tutorials/installing.html)
 
-### Install [AWS CLI](https://aws.amazon.com/cli/)
-`$ pip install awscli`
+## Installation
+**1. Install AWS CLI:**
+```sh
+$ pip install awscli
+```
+> Further information and installation instructions can be are available via the [AWS CLI](https://aws.amazon.com/cli/) docs.
 
-### Install ClaudiaJS CLI
-`$ npm install -g claudia`
+**2. Install ClaudiaJS CLI:**
+```sh
+$ npm install -g claudia
+```
 
-### Clone the repository.
-`$ git clone git@github.com:stuartflanagan/orb-react-ssr.git`
+**3. Clone this repo:**
 
-### Install Dependencies
-`$ npm install`
+```sh
+$ git clone --depth 1 https://github.com/stuartflanagan/orb-react-ssr.git my-app
+cd my-app
+```
+
+**4. Make it your own:**
+
+```sh
+rm -rf .git && git init && npm init
+```
+
+> This re-initializes the repo and sets up your NPM project.
+
+**5. Install the dependencies:**
+
+```sh
+npm install
+```
+
+> That is it for installation.
+
 
 
 ## Configure the Project for AWS
 There are 3 main areas to configure before you can create and deploy your project. These configuration variables are all set within the `package.json` file under `config`
 
-### Name (config.name)
+**1. Name (config.name)**
 This is the name of the Lambda function that will be created on AWS. It will also be used to identify the API Gateway proxy that is created.
 
-### Region (config.region)
+**2. Region (config.region)**
 This specifies the region you want to create the project in.
 
-### Asset bucket (config.assetBucket)
+**3. Asset bucket (config.assetBucket)**
 This is the name of the S3 bucket that is created to serve static assets. S3 bucket names are required to be unique across the whole of S3.
 
 ## Create the project and deploy to AWS Lambda, APIG and S3
@@ -44,8 +68,7 @@ This is currently in the `.gitignore` file so as to not share around a running p
 ### Create a New S3 bucket and copy transpiled assets
 ...
 ## Code editing and updates
-No doubt you will want to update the ReactJS app to do what you want it to do. If so fork this repo to your own repo and start making the changes required.
-When you are finished editing and are ready to deply the latest version to AWS run the following command.
+Besides the split between index.js as the entry point for WebPack
 
 `$ npm run deploy`
 

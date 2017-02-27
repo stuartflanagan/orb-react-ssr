@@ -1,12 +1,20 @@
-# React SSR with Lambda and APIG via ClaudiaJS
+# React SSR with AWS Lambda & API Gateway via ClaudiaJS
 
-Demo showing a very small reactjs with routes. The demo serves the initial route via API Gateway and Lambda and loads a webpack bundle from S3.
+This demo is a very small reactjs application with routes. The demo serves the initial route via a AWS Lambda function through API Gateway and loads extra assets including a client side webpack bundle from S3.
+
+## Quick-Start Guide
+
+- [Installation & Configuration](#Installation & Configuration)
+- [Configure the Project for Deployment to AWS](#development-workflow)
+- [Structure](#structure)
+- [CSS Modules](#css-modules)
+- [Handling URLS](#handling-urls)
+- [React Compatibility](#react-compatibility)
 
 ## Installation & Configuration
 
 This demo uses [ClaudiaJS](https://claudiajs.com/) to setup a Lambda function and put an API Gateway proxy infront of the Lambda function. Please refer to the [ClaudiaJS installation & configuration guide] (https://claudiajs.com/tutorials/installing.html)
 
-## Installation
 **1. Install AWS CLI:**
 ```sh
 $ pip install awscli
@@ -43,19 +51,24 @@ npm install
 
 
 
-## Configure the Project for AWS
+## Configure the Project for Deployment to AWS
+
 There are 3 main areas to configure before you can create and deploy your project. These configuration variables are all set within the `package.json` file under `config`
 
 **1. Name (config.name)**
+
 This is the name of the Lambda function that will be created on AWS. It will also be used to identify the API Gateway proxy that is created.
 
 **2. Region (config.region)**
+
 This specifies the region you want to create the project in.
 
 **3. Asset bucket (config.assetBucket)**
+
 This is the name of the S3 bucket that is created to serve static assets. S3 bucket names are required to be unique across the whole of S3.
 
-## Create the project and deploy to AWS Lambda, APIG and S3
+## Create the Project and Deploy to AWS Lambda, API Gateway and S3
+
 As long as you have an AWS user set up with the correct permissions you should just need to run this command.
 `$ npm run create`
 
@@ -64,12 +77,18 @@ This will also generate a `claudia.json` file in the project root directory with
 This is currently in the `.gitignore` file so as to not share around a running project.
 
 ### Create a New Lambda Function and API Gateway Proxy
+
 ...
 ### Create a New S3 bucket and copy transpiled assets
-...
-## Code editing and updates
-Besides the split between index.js as the entry point for WebPack
 
-`$ npm run deploy`
+...
+
+## Further Development
+This project is an example of serving a server side rendered react application from lambda. It is in no way a boilerplate style project. This project is intended to 
+```sh
+$ npm run deploy
+```
 
 You will receive confirmation that the bundle has been compiled and copied to AWS S3 as well as the server side application transpiled and deployed to the AWS Lambda function.
+
+## TODO

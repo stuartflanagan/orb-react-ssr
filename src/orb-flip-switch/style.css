@@ -1,0 +1,109 @@
+.orb-flip-switch {
+	display: block;
+	width: 600px;
+	height: 600px;
+	perspective: 500px;
+	--color: #EEE;
+}
+	img {
+		width: 100%;
+	}
+
+	.container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transform-style: preserve-3d;
+		transition: transform 0.8s cubic-bezier(0.6, 0, 0.3, 1);
+		transform: translateZ(-250px);
+	}
+
+	.front, .back {
+		border-radius: 50%;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--color);
+		backface-visibility: hidden;
+		transform: translateZ(-250px);
+	}
+
+	.back {
+		background: #FFF;
+		transform: translateZ(-250px) rotateY(180deg) rotateZ(180deg);
+	}
+
+	.front img {
+		width: 100%;
+		height: 100%;
+		max-height: 600px;
+		border-radius: 50%;
+		outline: none;
+		font-size: 60px;
+		background: none;
+		border: none;
+		color: #FFF;
+	}
+
+	.front img:hover,
+	.front img:focus {
+		box-shadow: inset 0 0 0 10px rgba(0, 0, 0, 0.4);
+	}
+
+	.ripple {
+		width: 1px;
+		height: 1px;
+		background: var(--color);
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transition: transform 0.6s cubic-bezier(0.6, 0, 0.3, 1);
+		transform: translate(-50%, -50%) scale(0);
+		border-radius: 50%;
+		will-change: transform;
+	}
+
+	.shadow2px,
+	.shadow12px {
+		width: 100%;
+		height: 100%;
+		background: #000;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 50%;
+		box-shadow: 0 0 4px 2px #000;
+		transition: transform 0.8s cubic-bezier(0.6, 0, 0.3, 1),
+				opacity 0.5s cubic-bezier(0.6, 0, 0.3, 1);
+		transform: scale(0.5) translateY(2px);
+		opacity: 0.3;
+	}
+
+	.shadow12px {
+		box-shadow: 0 0 24px 16px #000;
+		opacity: 0;
+	}
+
+
+		.flipped .container {
+			transform: translateZ(-250px) rotateX(180deg);
+		}
+
+		.flipped .ripple {
+			transform: translate(-50%, -50%) scale(1);
+		}
+
+		.flipped .shadow2px,
+		.flipped .shadow12px {
+			opacity: 0;
+			transform: translateY(80px) rotateX(180deg);
+		}
+
+		.flipped .shadow12px {
+			opacity: 0.2;
+		}

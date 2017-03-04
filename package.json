@@ -13,8 +13,8 @@
   ],
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.js",
-    "transpile": "babel --presets es2015 --plugins css-modules-transform src/server --out-dir bin",
-    "create:lambda": "npm run transpile && claudia create --name $npm_package_config_name --region $npm_package_config_region --deploy-proxy-api --handler bin/main.handler",
+    "transpile": "babel --presets es2015,stage-2 --plugins css-modules-transform src --out-dir bin",
+    "create:lambda": "npm run build && claudia create --name $npm_package_config_name --region $npm_package_config_region --deploy-proxy-api --handler bin/server.handler",
     "create:s3": "aws s3 mb s3://$npm_package_config_assetBucket && aws s3 website s3://$npm_package_config_assetBucket --index-document $npm_package_config_assetBucketIndex",
     "create": "npm run create:lambda && npm run create:s3",
     "deploy:lambda": "npm run transpile && claudia update",
@@ -32,6 +32,7 @@
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-css-modules-transform": "^1.2.1",
+    "babel-preset-env": "^1.2.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.13.0",
@@ -43,7 +44,8 @@
     "sass-loader": "^6.0.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.0"
+    "webpack-dev-server": "^1.15.0",
+    "webpack-node-externals": "^1.5.4"
   },
   "dependencies": {
     "history": "^4.5.1",

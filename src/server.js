@@ -22,11 +22,12 @@ exports.handler = function (event, context) {
 				<meta charset="utf-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<title>React + API Gateway + Lambda test</title>
+				<script src="https://s3-ap-southeast-2.amazonaws.com/orb.test.react/assets/style.css"></script>
 			</head>
 
 			<body>
 				<div id="app">${body}</div>
-				<script src="https://s3-ap-southeast-2.amazonaws.com/test.claudia.react/assets/bundle.js"></script>
+				<script src="https://s3-ap-southeast-2.amazonaws.com/orb.test.react/assets/bundle.js"></script>
 			</body>
 			</html>
 		`

@@ -2,12 +2,10 @@ var path = require('path')
 var webpack = require('webpack')
 var autoprefixer = require('autoprefixer')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var nodeExternals = require('webpack-node-externals')
 
 const ENV = process.env.NODE_ENV || 'development';
 const CSS_MAPS = ENV!=='production';
-
-
-module.exports = [config, serverConfig];
 
 const config = {
 	devtool: 'source-map',
@@ -47,6 +45,13 @@ const config = {
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
+				query: {
+					presets: [["env", {
+						"targets": {
+							"browsers": ["last 2 versions", "safari >= 7"]
+						}
+					}], "react"]
+				},
 				include: path.join(__dirname, 'src')
 			},
 			{
@@ -62,3 +67,43 @@ const config = {
 		]
 	}
 }
+
+const serverConfig = {
+	name: 'server',
+	target: 'node',
+	externals: [nodeExternals()],
+	entry: [
+		'./src/server.js'
+	],
+	output: {
+		path: path.join(__dirname, 'bin/'),
+		filename: 'server.js',
+		publicPath: 'bin/',
+		libraryTarget: 'commonjs2'
+	},
+	resolve: {
+		extensions: ['', '.jsx', '.js', '.json', '.scss']
+	},
+	postcss: () => [
+		autoprefixer({ browsers: 'last 2 versions' })
+	],
+	module: {
+		loaders: [
+			{
+				test: /\.js$/,
+				loader: 'babel-loader',
+				query: {
+					presets: ['es2015', 'stage-2', 'react']
+				},
+				include: path.join(__dirname, 'src')
+			},
+			{
+				// Transform our own .(sass|css) files with PostCSS and CSS-modules
+				test: /\.(scss|css)$/,
+				loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+			}
+		]
+	}
+}
+
+module.exports = [config, serverConfig];

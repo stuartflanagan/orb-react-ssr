@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var autoprefixer = require('autoprefixer')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var nodeExternals = require('webpack-node-externals')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const ENV = process.env.NODE_ENV || 'development';
 const CSS_MAPS = ENV!=='production';
@@ -15,7 +16,7 @@ const config = {
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',
-		publicPath: '/assets/'
+		publicPath: '/'
 	},
 	resolve: {
 		extensions: ['', '.jsx', '.js', '.json', '.scss']
@@ -38,6 +39,10 @@ const config = {
 			compressor: {
 				warnings: false
 			}
+		}),
+		new HtmlWebpackPlugin({
+			template: './src/index.ejs',
+			minify: { collapseWhitespace: true }
 		})
 	],
 	module: {
@@ -45,13 +50,6 @@ const config = {
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
-				query: {
-					presets: [["env", {
-						"targets": {
-							"browsers": ["last 2 versions", "safari >= 7"]
-						}
-					}], "react"]
-				},
 				include: path.join(__dirname, 'src')
 			},
 			{
@@ -59,12 +57,28 @@ const config = {
 				test: /\.(sass|css)$/,
 				include: [path.resolve(__dirname, 'src')],
 				loader: ExtractTextPlugin.extract('style?singleton', [
-					`css-loader?modules&importLoaders=1&sourceMap=${CSS_MAPS}`,
+					`css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&sourceMap=${CSS_MAPS}`,
 					'postcss-loader',
 					`sass-loader?sourceMap=${CSS_MAPS}`
 				].join('!'))
 			}
 		]
+	},
+	devServer: {
+		port: process.env.PORT || 8080,
+		host: 'localhost',
+		colors: true,
+		publicPath: '/',
+		contentBase: './src',
+		historyApiFallback: true,
+		open: true,
+		proxy: {
+			// OPTIONAL: proxy configuration:
+			// '/optional-prefix/**': { // path pattern to rewrite
+			//   target: 'http://target-host.com',
+			//   pathRewrite: path => path.replace(/^\/[^\/]+\//, '')   // strip first path segment
+			// }
+		}
 	}
 }
 

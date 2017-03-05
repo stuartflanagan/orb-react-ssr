@@ -1,5 +1,5 @@
 import React from 'react';
-import OrbFlipSwitch from './orb-flip-switch'
+
 
 import {
 	Route,
@@ -19,7 +19,7 @@ const AppLayout = () => (
 			<li><Link to="/latest/topics">Topics</Link></li>
 		</ul>
 		<hr/>
-		<OrbFlipSwitch />
+		
 		<Switch>
 			<Route exact path="/latest/" component={Home}/>
 			<Route path="/latest/about" component={About}/>

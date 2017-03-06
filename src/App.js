@@ -7,6 +7,8 @@ import {
 	Switch
 } from 'react-router-dom';
 
+import OrbFlipSwitch from './orb-flip-switch'
+
 export default ({ pathname }) => (
 	<AppLayout />
 );
@@ -19,7 +21,7 @@ const AppLayout = () => (
 			<li><Link to="/latest/topics">Topics</Link></li>
 		</ul>
 		<hr/>
-		
+		<OrbFlipSwitch />
 		<Switch>
 			<Route exact path="/latest/" component={Home}/>
 			<Route path="/latest/about" component={About}/>

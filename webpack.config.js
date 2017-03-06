@@ -27,6 +27,11 @@ const browserConfig = {
 	plugins: [
 
 		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify(ENV)
+			}
+		}),
 		new ExtractTextPlugin('style.css', {
 			allChunks: true
 		}),

@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "dev": "NODE_ENV=development webpack-dev-server --config webpack.config.js --inline --hot --progress",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
     "transpile": "babel --presets es2015,stage-2,react --plugins css-modules-transform src --out-dir bin",
     "create:lambda": "npm run build && claudia create --name $npm_package_config_name --region $npm_package_config_region --deploy-proxy-api --handler bin/server.handler",
     "create:s3": "aws s3 mb s3://$npm_package_config_assetBucket && aws s3 website s3://$npm_package_config_assetBucket --index-document $npm_package_config_assetBucketIndex",

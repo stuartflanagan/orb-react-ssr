@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReactDOMServer from 'react-dom/server'
-import StaticRouter from 'react-router'
+import { StaticRouter as Router } from 'react-router-dom'
 
 import App from './App';
 
@@ -11,11 +11,11 @@ export default function render(path) {
 	const context = {}
 
 	let body = ReactDOMServer.renderToString(
-		<StaticRouter
+		<Router
 			location={path}
 			context={context}>
 			<App/>
-		</StaticRouter>
+		</Router>
 	)
 
 	// context.url will contain the URL to redirect to if a <Redirect> was used

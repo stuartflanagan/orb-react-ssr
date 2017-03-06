@@ -8,7 +8,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 const ENV = process.env.NODE_ENV || 'development';
 const CSS_MAPS = ENV!=='production';
 
-const config = {
+const browserConfig = {
 	devtool: 'source-map',
 	entry: [
 		'./src/index'
@@ -27,11 +27,6 @@ const config = {
 	plugins: [
 
 		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.DefinePlugin({
-			'process.env': {
-				'NODE_ENV': JSON.stringify('production')
-			}
-		}),
 		new ExtractTextPlugin('style.css', {
 			allChunks: true
 		}),
@@ -54,7 +49,7 @@ const config = {
 			},
 			{
 				// Transform our own .(sass|css) files with PostCSS and CSS-modules
-				test: /\.(sass|css)$/,
+				test: /\.(sass|scss|css)$/,
 				include: [path.resolve(__dirname, 'src')],
 				loader: ExtractTextPlugin.extract('style?singleton', [
 					`css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&sourceMap=${CSS_MAPS}`,
@@ -113,11 +108,11 @@ const serverConfig = {
 			},
 			{
 				// Transform our own .(sass|css) files with PostCSS and CSS-modules
-				test: /\.(scss|css)$/,
+				test: /\.(sass|scss|css)$/,
 				loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
 			}
 		]
 	}
 }
 
-module.exports = [config, serverConfig];
+module.exports = [browserConfig, serverConfig];

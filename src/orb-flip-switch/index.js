@@ -46,10 +46,10 @@ export default class OrbFlipSwitch extends React.Component {
 
 					<div className={ style.container }>
 						<div className={ style.front } onClick={ this.flip }>
-							<img src="/home.png" alt="The Orbweavers - Home" />
+							<img src="https://s3-ap-southeast-2.amazonaws.com/orb.test.react/assets/home.png" alt="The Orbweavers - Home" />
 						</div>
 						<div className={ style.back } onClick={ this.flip }>
-							<img src="/hero.png" alt="The Orbweavers - Home" />
+							<img src="https://s3-ap-southeast-2.amazonaws.com/orb.test.react/assets/hero.png" alt="The Orbweavers - Home" />
 						</div>
 					</div>
 				</div>

@@ -4,6 +4,7 @@ var autoprefixer = require('autoprefixer')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var nodeExternals = require('webpack-node-externals')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const ENV = process.env.NODE_ENV || 'development';
 const CSS_MAPS = ENV!=='production';
@@ -25,7 +26,9 @@ const browserConfig = {
 		autoprefixer({ browsers: 'last 2 versions' })
 	],
 	plugins: [
-
+		new CopyWebpackPlugin([
+			{ from: './src/orb-flip-switch/images' }
+		]),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
@@ -47,6 +50,10 @@ const browserConfig = {
 	],
 	module: {
 		loaders: [
+			{ 
+				test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
+				loader: "file-loader"
+			},
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
@@ -103,6 +110,10 @@ const serverConfig = {
 	],
 	module: {
 		loaders: [
+			{ 
+				test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
+				loader: "file-loader"
+			},
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',

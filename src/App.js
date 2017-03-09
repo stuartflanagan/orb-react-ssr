@@ -15,25 +15,27 @@ export default ({ pathname }) => (
 
 const AppLayout = () => (
 	<div>
-		<ul>
-			<li><Link to="/latest/">Home</Link></li>
-			<li><Link to="/latest/about">About</Link></li>
-			<li><Link to="/latest/topics">Topics</Link></li>
-		</ul>
+		<nav>
+			<ul>
+				<li><Link to="/latest/">Home</Link></li>
+				<li><Link to="/latest/about">About</Link></li>
+				<li><Link to="/latest/topics">Topics</Link></li>
+			</ul>
+		</nav>
 		<hr/>
-		<OrbFlipSwitch />
 		<Switch>
-			<Route exact path="/latest/" component={Home}/>
-			<Route path="/latest/about" component={About}/>
-			<Route path="/latest/topics" component={Topics}/>
-			<Route component={NoMatch}/>
+			<Route exact path="/latest/" component={Home} />
+			<Route path="/latest/about" component={About} />
+			<Route path="/latest/topics" component={Topics} />
+			<Route component={NoMatch} />
 		</Switch>
 	</div>
 );
 
 const Home = () => (
 	<div>
-		<h2>Home</h2>
+		<h1>Home</h1>
+		<OrbFlipSwitch />
 	</div>
 );
 

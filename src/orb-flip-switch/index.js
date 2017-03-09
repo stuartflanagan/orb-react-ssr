@@ -20,13 +20,14 @@ export default class OrbFlipSwitch extends React.Component {
 	}
 
 	onResize() {
-		this.setState({rippleArea: this.getRippleArea()});
+		let boundingBox = ReactDOM.findDOMNode(this).getBoundingClientRect()
+		this.setState({rippleArea: this.getRippleArea(boundingBox)});
 	}
 
-	getRippleArea () {
-		const position = ReactDOM.findDOMNode(this).getBoundingClientRect();
-		const midX = position.left + position.width * 0.5;
-		const midY = position.top + position.height * 0.5;
+
+	getRippleArea (boundingBox = { left:0, right:0, width:0, height:0 }) {
+		const midX = boundingBox.left + boundingBox.width * 0.5;
+		const midY = boundingBox.top + boundingBox.height * 0.5;
 
 		const rX = Math.max(midX, window.innerWidth - midX);
 		const rY = Math.max(midY, window.innerHeight - midY);
@@ -43,7 +44,6 @@ export default class OrbFlipSwitch extends React.Component {
 					<div className={ style.ripple } onClick={ this.flip } style={ this.state.rippleArea }></div>
 					<div className={ style.shadow2px }></div>
 					<div className={ style.shadow12px }></div>
-
 					<div className={ style.container }>
 						<div className={ style.front } onClick={ this.flip }>
 							<img src="https://s3-ap-southeast-2.amazonaws.com/orb.test.react/assets/logo.png" alt="The Orbweavers - Home" />

@@ -1,11 +1,9 @@
 import React from 'react';
 import AppLayout from '../app-layout';
-import Welcome from '../welcome';
+import OrbFlipSwitch from '../orb-flip-switch-gsap';
 
 export default ({ pathname }) => (
 	<div>
-		<Welcome>
-			<AppLayout />
-		</Welcome>
+		<OrbFlipSwitch />
 	</div>
 );

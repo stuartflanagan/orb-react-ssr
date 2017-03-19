@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import style from './style';
-import TweenMax from 'gsap';
+
+import { TweenLite } from 'gsap';
 
 export default class OrbFlipSwitch extends React.Component {
 
@@ -13,7 +14,6 @@ export default class OrbFlipSwitch extends React.Component {
 
 	componentDidMount(){
 		this.onResize();
-		
 	}
 
 	flip(event){
@@ -28,6 +28,7 @@ export default class OrbFlipSwitch extends React.Component {
 
 
 	getRippleArea (boundingBox = { left:0, right:0, width:0, height:0 }) {
+
 		const midX = boundingBox.left + boundingBox.width * 0.5;
 		const midY = boundingBox.top + boundingBox.height * 0.5;
 
@@ -36,23 +37,22 @@ export default class OrbFlipSwitch extends React.Component {
 
 		const radius = Math.sqrt(rX * rX + rY * rY);
 
-		return {width: `${radius * 2}px`, height:  `${radius * 2}px`};
+		return { width: `${radius * 2}px`, height:  `${radius * 2}px` };
 	}
 	
 	render(){
-		//{ React.cloneElement(this.props.children, { flip: this.flip }) }
 		return (
 			<div className={ style.orbFlipSwitch }>
 				<div className={ this.state.flipped ? style.flipped : '' }>
-					<div className={ style.ripple } style={ this.state.rippleArea }></div>
+					<div className={ style.ripple } onClick={ this.flip } style={ this.state.rippleArea }></div>
 					<div className={ style.shadow2px }></div>
 					<div className={ style.shadow12px }></div>
 					<div className={ style.container }>
 						<div className={ style.front } onClick={ this.flip }>
 							<img src="https://s3-ap-southeast-2.amazonaws.com/orb.test.react/assets/logo.png" alt="The Orbweavers - Home" />
 						</div>
-						<div className={ style.back }>
-							 {React.cloneElement(this.props.children, { flip: this.flip })}
+						<div className={ style.back } onClick={ this.flip }>
+							<img src="https://s3-ap-southeast-2.amazonaws.com/orb.test.react/assets/hero.png" alt="The Orbweavers - Home" />
 						</div>
 					</div>
 				</div>

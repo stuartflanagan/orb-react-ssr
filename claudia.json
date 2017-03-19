@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "orb-react-ssr-executor",
+    "name": "orb-react-ssr",
+    "region": "ap-southeast-2"
+  },
+  "api": {
+    "id": "lmqsydqbu3"
+  }
+}
